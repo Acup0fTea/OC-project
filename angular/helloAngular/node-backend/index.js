@@ -11,7 +11,7 @@ const { nextTick } = require('process');
 mongoose.Promise = global.Promise;
 mongoose.connect(mongodb.db, {
     useNewUrlParser: true,
-    //useFindAndModify: false,
+    // useFindAndModify: false,
     useUnifiedTopology: true
 }).then(() => {
     console.log('Database successfully connected');
@@ -19,9 +19,10 @@ mongoose.connect(mongodb.db, {
     console.log('Database error: ' + error);
 })
 
-const bookRoute = require('./routes/book.routes.js');
+const bookRoute = require('./routes/book.routes');
 
 const app = express();
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ 
     extended: false }))
 app.use(cors());
@@ -46,9 +47,9 @@ app.listen(port,() => {
 })
 
 // 404 Handler
-// app.use((req, res, next) => {
-//     next(creatError(404));
-// })
+app.use((req, res, next) => {
+    next(creatError(404));
+})
 
 // error handler
 

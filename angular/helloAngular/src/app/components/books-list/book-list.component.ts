@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { CrudService } from 'src/app/service/crud.service';
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css']
 })
-export class BookListComponent {
+export class BookListComponent implements OnInit {
   Books:any = [];
 
   constructor (private CrudService: CrudService ) { }
 
-  ngOninit (): void {
-    this.CrudService.GetBooks().subscribe(res => {
+  ngOnInit(): void {
+    this.CrudService.GetBooks().subscribe(res =>{
       console.log(res);
-      this.Books = res;
+      this.Books = res
     })
   }
 
